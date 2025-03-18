@@ -6,6 +6,8 @@ import 'package:location/location.dart';
 import 'package:dartz/dartz.dart';
 
 class MapRepo {
+  Location location = Location();
+
   Future<BitmapDescriptor> getMarkerCustomIcon() async {
     BitmapDescriptor customIcon = await BitmapDescriptor.asset(
       const ImageConfiguration(size: Size(64, 64)),
@@ -19,14 +21,10 @@ class MapRepo {
   }
 
   Future<Stream<LocationData>> getLocationStream() async {
-    Location location = Location();
-
     return location.onLocationChanged;
   }
 
   Future<Either<String, LocationData>> getInitialLocation() async {
-    Location location = Location();
-
     bool serviceEnabled;
     PermissionStatus permissionGranted;
     LocationData locationData;
