@@ -1,0 +1,14 @@
+part of 'map_bloc.dart';
+
+@immutable
+sealed class MapState {}
+
+final class MapInitial extends MapState {}
+
+final class MapLoading extends MapState {}
+
+final class MapLoaded extends MapState {
+  final LatLng location;
+
+  MapLoaded({required this.location});
+}

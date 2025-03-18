@@ -1,66 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:orientation/maps/presentation/manager/map_bloc.dart';
 
-import 'classes.dart';
+import 'maps/presentation/pages/home_page.dart';
 
-void main() {
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
+    return  MaterialApp(
       title: 'Flutter branch testing',
-
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
-        items: const[
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.search),
-            label: 'Search',
-          ),
-        ],
+      home: BlocProvider(
+        create: (context) => MapBloc()..add(LoadMapEvent()),
+        child: const MyHomePage(
+        ),
       ),
-      tabBuilder: (context, index) {
-        return CupertinoTabView(
-          builder: (context) {
-            return CupertinoPageScaffold(
-              navigationBar: CupertinoNavigationBar(leading: const Icon(Icons.arrow_back_ios),
-                middle: Text('Tab ${index + 1}'), // Dynamic title based on tab.
-              ),
-              child: Center(
-                child: Text('Content of Tab ${index + 1}'),
-              ),
-            );
-          },
-        );
-      },
     );
   }
 }
+
+
+
