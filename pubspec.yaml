@@ -19,6 +19,7 @@ dependencies:
   bloc: ^9.0.0
   dartz: ^0.10.1
   flutter_polyline_points: ^2.1.0
+  opticore: ^2.0.1
 
 dev_dependencies:
   flutter_test:

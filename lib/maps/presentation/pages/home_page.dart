@@ -12,6 +12,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   icon: BlocProvider.of<MapBloc>(context).markersIcon, // Now it's a valid BitmapDescriptor
                 )
               },
-              initialCameraPosition: const CameraPosition(
-                  zoom: 16, target: LatLng(30.028845, 31.407584)),
+              initialCameraPosition: CameraPosition(
+                  zoom: 16, target: state.location),
             );
           } else {
             return const Text("Something is wrong");
