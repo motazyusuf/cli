@@ -22,13 +22,16 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       markersIcon = await repo.getMarkerCustomIcon();
       style = await repo.getMapStyle();
       var result = await repo.getInitialLocation();
-      result.fold((_) {}, (initialLocation) {
+
+      result.fold((_) {
+      }, (initialLocation) {
         currentLocation =
             LatLng(initialLocation.latitude!, initialLocation.longitude!);
       });
 
       Stream<LocationData> liveLocation = await repo.getLocationStream();
       emit(MapLoaded(location: currentLocation));
+
       liveLocation.listen((newLocation) {
         add(UpdateLocationEvent(
             LatLng(newLocation.latitude!, newLocation.longitude!)));

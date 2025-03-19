@@ -45,7 +45,9 @@ class MapRepo {
       }
     }
 
+    print("Getting location");
     locationData = await location.getLocation();
+    print("Got location");
     return Right(locationData);
   }
 

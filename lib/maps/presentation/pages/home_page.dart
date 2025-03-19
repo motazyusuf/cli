@@ -21,6 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: BlocBuilder<MapBloc, MapState>(
         builder: (context, state) {
           if (state is MapLoading) {
+            print("Loading");
             return const Center(
               child: CircularProgressIndicator(),
             );
